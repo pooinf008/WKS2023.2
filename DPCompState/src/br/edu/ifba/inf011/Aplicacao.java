@@ -1,6 +1,7 @@
 package br.edu.ifba.inf011;
 
 import br.edu.ifba.inf011.model.impl.VooImpl;
+import br.edu.ifba.inf011.state.VooComState;
 import br.edu.ifba.inf011.model.Voo;
 
 
@@ -10,7 +11,10 @@ public class Aplicacao {
 	public void run()  {
 		
 		
-		Voo voo = new VooImpl("G31400", 9, 6);
+		Voo voo = new VooComState("G31400", 9, 6);
+		voo.abrirCheckin();
+		voo.abrirEmbarque();
+		
 		for(int iCount = 0; iCount < 15; iCount++) {
 			int[] poltrona = null; 
 			poltrona = voo.reservar();

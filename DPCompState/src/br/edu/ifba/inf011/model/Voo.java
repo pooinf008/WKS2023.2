@@ -10,7 +10,7 @@ public interface Voo{
 	
 	public static String printReserva(int[] poltrona) {
 		if(poltrona == null)
-			return "NÃO LOCALIZADO";
+			return "Nï¿½O LOCALIZADO";
 		char chLinha = (char) ('1' + poltrona[Voo.LINHA]);
 		char chColuna = (char) ('A' + poltrona[Voo.COLUNA]);
 		String strPoltrona = Character.toString(chLinha)  +
@@ -24,9 +24,15 @@ public interface Voo{
 	public void cancelarReserva(Integer linha, Integer coluna);
 	public boolean disponivel(Integer linha, Integer coluna);
 	
+	public int[] facaReserva(Integer linha, Integer coluna);
+	public void facaCancelamento(Integer linha, Integer coluna);
+	
 	public void abrirCheckin();
 	public void abrirEmbarque();
 	public void cancelar();
 	public void abrirReserva();
 	public void finalizar();
+
+	public int getQtdeLinhas();
+	public int getQtdeColunas();
 }

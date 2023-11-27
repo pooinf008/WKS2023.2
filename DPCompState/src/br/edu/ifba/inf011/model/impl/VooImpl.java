@@ -25,7 +25,7 @@ public class VooImpl implements Voo{
 		return numero;
 	}
 	
-	/* MUDANÇA DE ESTADOS */
+	/* MUDANï¿½A DE ESTADOS */
 	public void abrirCheckin() {
 		if(this.state == VooState.RESERVA || this.state == VooState.EMBARQUE)
 			this.state = VooState.CHECKIN;
@@ -52,15 +52,6 @@ public class VooImpl implements Voo{
 	}	
 	
 	
-	private int[] facaReserva(Integer linha, Integer coluna) {
-		if(!this.disponivel(linha, coluna))
-			return null;
-		int[] posicao = new int[2];
-		posicao[0] = linha;
-		posicao[1] = coluna;
-		this.cadeiras[linha][coluna] = true;
-		return posicao;
-	}
 	
 	
 	@Override
@@ -79,7 +70,6 @@ public class VooImpl implements Voo{
 
 	@Override
 	public int[] reservar() {
-		
 		if(!(state == VooState.CHECKIN || state == VooState.EMBARQUE))
 			return null;
 
@@ -98,16 +88,33 @@ public class VooImpl implements Voo{
 	public void cancelarReserva(Integer linha, Integer coluna) {
 		if(state != VooState.CHECKIN && state != VooState.EMBARQUE)
 			return;		
-		this.cadeiras[linha][coluna] = false;
+		this.facaCancelamento(linha, coluna);
 	}
 	
 	
-	private int getQtdeLinhas() {
+	public int getQtdeLinhas() {
 		return this.cadeiras.length;
 	}	
 	
-	private int getQtdeColunas() {
+	public int getQtdeColunas() {
 		return this.cadeiras[0].length;
+	}
+
+	@Override
+	public int[] facaReserva(Integer linha, Integer coluna) {
+		if(!this.disponivel(linha, coluna))
+			return null;
+		int[] posicao = new int[2];
+		posicao[0] = linha;
+		posicao[1] = coluna;
+		this.cadeiras[linha][coluna] = true;
+		return posicao;
+	}
+
+
+	@Override
+	public void facaCancelamento(Integer linha, Integer coluna) {
+		this.cadeiras[linha][coluna] = false;
 	}	
 	
 	
